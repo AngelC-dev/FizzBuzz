@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by AngelC-dev</title>
+    <title>FIZZBUZZ: A Coding Project by AngelC-dev</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,9 +20,9 @@
 
 <body class="d-flex flex-column h-100">
 <!-- Nav Section -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg--primary-color">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/myMark.png" class="d-inline-block align-top" width="30" height="24"> App Name</a>
+        <a class="navbar-brand" href="#"><img src="img/myMark.png" class="d-inline-block align-top" width="30" height="24"> FIZZBUZZ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                     <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                    <a class="nav-link" target="_blank" href="https://github.com/AngelC-dev/FizzBuzz">Git Repo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="http://www.aacruzsr.com">About</a>
@@ -51,21 +51,84 @@
 <!-- Main Section -->
 <main class="flex-shrink-0">
     <div class="container py-5 px-5 mt-5">
-        <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+        <h2 class="border-1 border-bottom border-dark">The Code for FIZZBUZZ</h2>
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-lg-8">
                 <pre class="line-numbers"><code class="language-javascript">
-                    //Call Hello World
-                        function helloWorld(){
-                        alert("Hello World")
-                        }
+// Get the values from the page
+// Start our controller function
+function getValues() {
+  let startValue = 1;
+  let endValue = 100;
+
+  // We call generateNumbers
+  let numbers = generateNumbers(startValue, endValue);
+  // We call displayNumbers
+  displayNumbers(numbers);
+}
+
+// Generate numbers from start value to end value
+// Logic functions
+function generateNumbers(startValue, endValue) {
+  let numbers = [];
+
+  // We want to get all numbers from start to end
+  for (let index = startValue; index <= endValue; index++) {
+    let number;
+
+    if (index % 3 === 0 && index % 5 === 0) {
+      number = "FizzBuzz";
+    } else if (index % 3 === 0) {
+      number = "Fizz";
+    } else if (index % 5 === 0) {
+      number = "Buzz";
+    } else {
+      number = index;
+    }
+
+    numbers.push(number);
+  }
+
+  return numbers;
+}
+
+// Display the numbers and mark even numbers bold
+// Display or view functions
+function displayNumbers(numbers) {
+  let templateRows = "";
+
+  for (let index = 0; index < numbers.length; index++) {
+    let className = "even";
+    let number = numbers[index];
+
+    if (typeof number === "number") {
+      if (number % 2 === 0) {
+        className = "even";
+      } else {
+        className = "odd";
+      }
+    }
+
+    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+  }
+
+  document.getElementById("results").innerHTML = templateRows;
+}
+
                 </code>
                 </pre> 
             </div>
             <div class="col-lg-4">
-                <p1>The Code is structed in one function.</p1>
-                <h5>Hello World</h5>
-                <p>Hello world is a function that displays the message "Hello World".</p>
+                <p1>Here's a summary of what each function does:</p1>
+                <h5>getValues()</h5>
+                <p>This function retrieves the start and end values from the page, validates them as integers, and calls the `generateNumbers()` function with the valid input. If the input is not valid, it displays an alert.</p>
+                <h5>generateNumbers(startValue, endValue)</h5>
+                <p>This function generates an array of numbers from the `startValue` to the `endValue`. It checks each number and replaces it with "Fizz", "Buzz", or "FizzBuzz" based on the multiples of 3 and 5.</p>
+                <h5>displayNumbers(numbers)</h5>
+                <p>This function takes an array of numbers and displays them on the page. It marks even numbers with the CSS class "even" and odd numbers with the class "odd". It also handles the modified numbers ("Fizz", "Buzz", and "FizzBuzz") by displaying them accordingly.</p>
+                <h5>These functions work together to generate and display a sequence of numbers from 1 to 100, with specific replacements for multiples of 3, 5, and both.</h5>
+                <p>Centus and Fizz Buzz are two different programming exercises that involve manipulating and printing a sequence of numbers based on certain conditions. Here are the differences between them:                    
+                Centus is a coding exercise where the goal is to print numbers from 1 to 100. Fizz Buzz is a classic coding exercise where the goal is to print numbers from 1 to 100, replacing the multiples of 3 with "Fizz", multiples of 5 with "Buzz", and multiples of both 3 and 5 with "FizzBuzz".</p>
             </div>
         </div>
     </div>

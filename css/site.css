@@ -6,15 +6,15 @@
 }
 
 body {
-    color:var(--dark-color);
+    color:var(--primary-color);
 }
 
 nav {
-    background-color: var(--dark-color);
+    background-color: var(--primary-color);
 }
 
 footer {
-    background-color: var(--dark-color);
+    background-color: var(--primary-color);
  }
 
 h1,h2,h3,h4,h5,h6 {
