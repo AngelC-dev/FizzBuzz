@@ -47,6 +47,21 @@ footer .social>a:hover{
     color:  blue;
 }
 
+.Fizz {
+    color: green;
+    font-weight: bold;
+}
+
+.Buzz {
+    color: blueviolet;
+    font-weight: bold;
+}
+
+.FizzBuzz {
+    color: red;
+    font-weight: bolder;
+}
+
 .checklist >li i{
     color: var(--secondary-color);
 }

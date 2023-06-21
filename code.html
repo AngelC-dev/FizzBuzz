@@ -57,64 +57,78 @@
                 <pre class="line-numbers"><code class="language-javascript">
 // Get the values from the page
 // Start our controller function
+
 function getValues() {
-  let startValue = 1;
-  let endValue = 100;
-
-  // We call generateNumbers
-  let numbers = generateNumbers(startValue, endValue);
-  // We call displayNumbers
-  displayNumbers(numbers);
-}
-
-// Generate numbers from start value to end value
-// Logic functions
-function generateNumbers(startValue, endValue) {
-  let numbers = [];
-
-  // We want to get all numbers from start to end
-  for (let index = startValue; index <= endValue; index++) {
-    let number;
-
-    if (index % 3 === 0 && index % 5 === 0) {
-      number = "FizzBuzz";
-    } else if (index % 3 === 0) {
-      number = "Fizz";
-    } else if (index % 5 === 0) {
-      number = "Buzz";
+    let fizzValue = document.getElementById("fizzValue").value;
+    let buzzValue = document.getElementById("buzzValue").value;
+                      
+// Parse for numbers
+    fizzValue = parseInt(fizzValue);
+    buzzValue = parseInt(buzzValue);
+                      
+// Check that the numbers are integers
+    if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+// Call fizzBuzz
+    let fbArray = fizzBuzz(fizzValue, buzzValue);
+                      
+// Call displayData and write the values to the screen
+    displayData(fbArray);
     } else {
-      number = index;
+        alert("You must enter an integer.");
     }
-
-    numbers.push(number);
-  }
-
-  return numbers;
 }
+                      
+// Do fizz buzz
 
-// Display the numbers and mark even numbers bold
-// Display or view functions
-function displayNumbers(numbers) {
-  let templateRows = "";
-
-  for (let index = 0; index < numbers.length; index++) {
-    let className = "even";
-    let number = numbers[index];
-
-    if (typeof number === "number") {
-      if (number % 2 === 0) {
-        className = "even";
-      } else {
-        className = "odd";
-      }
+function fizzBuzz(fizzValue, buzzValue) {
+    let returnArray = [];
+                      
+// Loop from 1 to 100
+    for (let i = 1; i <= 100; i++) {
+        if (i % fizzValue === 0 && i % buzzValue === 0) {
+            returnArray.push("FizzBuzz");
+        } else if (i % fizzValue === 0) {
+            returnArray.push("Fizz");
+        } else if (i % buzzValue === 0) {
+            returnArray.push("Buzz");
+        } else {
+            returnArray.push(i);
+        }
     }
-
-    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
-  }
-
-  document.getElementById("results").innerHTML = templateRows;
+    return returnArray;
 }
+                      
+// Loop over the array and create a table row for each item
 
+function displayData(fbArray) {
+
+// Get the table body from the page
+    let tableBody = document.getElementById("results");
+                      
+// Get the templateRow
+    let templateRow = document.getElementById("fbTemplate");
+                      
+// Clear table first
+    tableBody.innerHTML = "";
+                      
+    for (let i = 0; i < fbArray.length; i += 5) {
+        let tableRow = document.importNode(templateRow.content, true);
+                      
+// Grab the td elements and populate them with values
+    let rowCols = tableRow.querySelectorAll("td");
+        rowCols[0].textContent = fbArray[i];
+        rowCols[1].textContent = fbArray[i + 1];
+        rowCols[2].textContent = fbArray[i + 2];
+        rowCols[3].textContent = fbArray[i + 3];
+        rowCols[4].textContent = fbArray[i + 4];
+                      
+        tableBody.appendChild(tableRow);
+        }
+    }
+                      
+// Event listener for the submit button
+document.getElementById("btnSubmit").addEventListener("click", getValues);
+                      
                 </code>
                 </pre> 
             </div>

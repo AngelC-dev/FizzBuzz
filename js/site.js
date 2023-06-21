@@ -1,60 +1,80 @@
 // Get the values from the page
 // Start our controller function
 function getValues() {
-    let startValue = 1;
-    let endValue = 100;
+    let fizzValue = document.getElementById("fizzValue").value;
+    let buzzValue = document.getElementById("buzzValue").value;
   
-    // We call generateNumbers
-    let numbers = generateNumbers(startValue, endValue);
-    // We call displayNumbers
-    displayNumbers(numbers);
+    // Parse for numbers
+    fizzValue = parseInt(fizzValue);
+    buzzValue = parseInt(buzzValue);
+  
+    // Check that the numbers are integers
+    if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+      // Call fizzBuzz
+      let fbArray = fizzBuzz(fizzValue, buzzValue);
+  
+      // Call displayData and write the values to the screen
+      displayData(fbArray);
+    } else {
+      alert("You must enter an integer.");
+    }
   }
   
-  // Generate numbers from start value to end value
-  // Logic functions
-  function generateNumbers(startValue, endValue) {
-    let numbers = [];
+  // Do fizz buzz
+  function fizzBuzz(fizzValue, buzzValue) {
+    let returnArray = [];
   
-    // We want to get all numbers from start to end
-    for (let index = startValue; index <= endValue; index++) {
-      let number;
-  
-      if (index % 3 === 0 && index % 5 === 0) {
-        number = "FizzBuzz";
-      } else if (index % 3 === 0) {
-        number = "Fizz";
-      } else if (index % 5 === 0) {
-        number = "Buzz";
+    // Loop from 1 to 100
+    for (let i = 1; i <= 100; i++) {
+      if (i % fizzValue === 0 && i % buzzValue === 0) {
+        returnArray.push("FizzBuzz");
+      } else if (i % fizzValue === 0) {
+        returnArray.push("Fizz");
+      } else if (i % buzzValue === 0) {
+        returnArray.push("Buzz");
       } else {
-        number = index;
+        returnArray.push(i);
       }
-  
-      numbers.push(number);
     }
-  
-    return numbers;
+    return returnArray;
   }
   
-  // Display the numbers and mark even numbers bold
-  // Display or view functions
-  function displayNumbers(numbers) {
-    let templateRows = "";
+  // Loop over the array and create a table row for each item
+  function displayData(fbArray) {
+    // Get the table body from the page
+    let tableBody = document.getElementById("results");
   
-    for (let index = 0; index < numbers.length; index++) {
-      let className = "even";
-      let number = numbers[index];
+    // Get the templateRow
+    let templateRow = document.getElementById("fbTemplate");
   
-      if (typeof number === "number") {
-        if (number % 2 === 0) {
-          className = "even";
-        } else {
-          className = "odd";
-        }
-      }
+    // Clear table first
+    tableBody.innerHTML = "";
   
-      templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+    for (let i = 0; i < fbArray.length; i += 5) {
+      let tableRow = document.importNode(templateRow.content, true);
+  
+      // Grab the td elements and populate them with values
+      let rowCols = tableRow.querySelectorAll("td");
+
+      rowCols[0].classList.add(fbArray[i]);
+      rowCols[0].textContent = fbArray[i];
+
+      rowCols[1].classList.add(fbArray[i + 1]);
+      rowCols[1].textContent = fbArray[i + 1];
+
+      rowCols[2].classList.add(fbArray[i + 2]);
+      rowCols[2].textContent = fbArray[i + 2];
+
+      rowCols[3].classList.add(fbArray[i + 3]);
+      rowCols[3].textContent = fbArray[i + 3];
+
+      rowCols[4].classList.add(fbArray[i + 4]);
+      rowCols[4].textContent = fbArray[i + 4];
+  
+      tableBody.appendChild(tableRow);
     }
-  
-    document.getElementById("results").innerHTML = templateRows;
   }
+  
+  // Event listener for the submit button
+  document.getElementById("btnSubmit").addEventListener("click", getValues);
   
